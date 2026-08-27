@@ -7,7 +7,12 @@ addbutton.addEventListener("click", function() {
     console.log(txt)
 
 let novatarefa = document.createElement('li')
+let remove = document.createElement('button')
+
 novatarefa.innerText = txt
+remove.innerText = "Excluir"
+novatarefa.appendChild(remove)
 ul.appendChild(novatarefa)
+
 ipt.value = ''
 });
