@@ -4,29 +4,37 @@ const ul = document.getElementById('lista-tarefas')
 
 addbutton.addEventListener("click", function() {
     let txt = ipt.value
-    console.log(txt)
 
-let novatarefa = document.createElement('li')
-let remove = document.createElement('button')
-let concluido = document.createElement('button')
+    let novatarefa = document.createElement('li')
+    let texto = document.createElement('span')
+    let remove = document.createElement('button')
+    let concluido = document.createElement('button')
+    let editar = document.createElement('button')
 
-novatarefa.innerText = txt
-remove.innerText = "Excluir"
+    texto.innerText = txt
+    remove.innerText = "Excluir"
+    concluido.innerText = "✓"
+    editar.innerText = '✏️'
 
-novatarefa.appendChild(remove)
-ul.appendChild(novatarefa)
+    novatarefa.appendChild(texto)
+    novatarefa.appendChild(concluido)
+    novatarefa.appendChild(editar)
+    novatarefa.appendChild(remove)
 
-concluido.innerText = "✓"
-novatarefa.appendChild(concluido)
+    ul.appendChild(novatarefa)
 
-ipt.value = ''
+    ipt.value = ''
 
-remove.addEventListener('click', function(){
-    novatarefa.remove()
-});
+    remove.addEventListener('click', function(){
+        novatarefa.remove()
+    });
 
-concluido.addEventListener('click', function(){
-    novatarefa.classList.add('concluida')
-});
+    concluido.addEventListener('click', function(){
+        texto.classList.add('concluida')
+    });
 
+    editar.addEventListener('click', function(){
+        texto.contentEditable = 'true'
+        texto.focus()
+    });
 });
