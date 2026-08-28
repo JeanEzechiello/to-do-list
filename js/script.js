@@ -5,7 +5,7 @@ let tarefas = []
 
 addbutton.addEventListener("click", function() {
     let txt = ipt.value
-    criarTarefa(txt)
+    criarTarefa(txt, false)
 
     tarefas.push({texto: txt, concluida: false})
     localStorage.setItem("trf", JSON.stringify(tarefas))
@@ -14,7 +14,7 @@ addbutton.addEventListener("click", function() {
 
 });
 
-function criarTarefa(txt) {
+function criarTarefa(txt, concluida) {
     let novatarefa = document.createElement('li')
     let texto = document.createElement('span')
     let remove = document.createElement('button')
@@ -38,6 +38,12 @@ function criarTarefa(txt) {
 
     concluido.addEventListener('click', function(){
         texto.classList.add('concluida')
+        let search = tarefas.find(function(t) {
+            return t.texto === txt
+        });
+        console.log(search)
+        search.concluida = true
+        localStorage.setItem("trf", JSON.stringify(tarefas))
     });
 
     editar.addEventListener('click', function(){
@@ -45,12 +51,15 @@ function criarTarefa(txt) {
         texto.focus()
     });
 
+    if(concluida) {
+        texto.classList.add('concluida')
+    }
 }
 
 let tarefasSalvas = JSON.parse(localStorage.getItem('trf'))
 
 if(tarefasSalvas) {
     tarefasSalvas.forEach(function(item) {
-        criarTarefa(item.texto)
+        criarTarefa(item.texto, item.concluida)
     });
 }
