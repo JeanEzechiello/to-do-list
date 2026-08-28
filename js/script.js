@@ -35,6 +35,11 @@ function criarTarefa(txt, concluida, id) {
 
     remove.addEventListener('click', function(){
         novatarefa.remove()
+        tarefas = tarefas.filter(function(t) {
+            return t.id !== id
+            
+        });
+        localStorage.setItem("trf", JSON.stringify(tarefas))
     });
 
     concluido.addEventListener('click', function(){
