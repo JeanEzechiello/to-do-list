@@ -7,7 +7,7 @@ addbutton.addEventListener("click", function() {
     let txt = ipt.value
     criarTarefa(txt)
 
-    tarefas.push(txt)
+    tarefas.push({texto: txt, concluida: false})
     localStorage.setItem("trf", JSON.stringify(tarefas))
 
     ipt.value = ''
@@ -45,4 +45,12 @@ function criarTarefa(txt) {
         texto.focus()
     });
 
+}
+
+let tarefasSalvas = JSON.parse(localStorage.getItem('trf'))
+
+if(tarefasSalvas) {
+    tarefasSalvas.forEach(function(item) {
+        criarTarefa(item.texto)
+    });
 }
