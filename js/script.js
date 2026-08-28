@@ -4,17 +4,18 @@ const ul = document.getElementById('lista-tarefas')
 let tarefas = []
 
 addbutton.addEventListener("click", function() {
+    let id = Date.now() + Math.random()
     let txt = ipt.value
-    criarTarefa(txt, false)
+    criarTarefa(txt, false, id)
 
-    tarefas.push({texto: txt, concluida: false})
+    tarefas.push({texto: txt, concluida: false, id: id})
     localStorage.setItem("trf", JSON.stringify(tarefas))
 
     ipt.value = ''
 
 });
 
-function criarTarefa(txt, concluida) {
+function criarTarefa(txt, concluida, id) {
     let novatarefa = document.createElement('li')
     let texto = document.createElement('span')
     let remove = document.createElement('button')
@@ -37,12 +38,12 @@ function criarTarefa(txt, concluida) {
     });
 
     concluido.addEventListener('click', function(){
-        texto.classList.add('concluida')
+        texto.classList.toggle('concluida')
         let search = tarefas.find(function(t) {
-            return t.texto === txt
+            return t.id === id
         });
         console.log(search)
-        search.concluida = true
+        search.concluida = !search.concluida
         localStorage.setItem("trf", JSON.stringify(tarefas))
     });
 
@@ -60,6 +61,7 @@ let tarefasSalvas = JSON.parse(localStorage.getItem('trf'))
 
 if(tarefasSalvas) {
     tarefasSalvas.forEach(function(item) {
-        criarTarefa(item.texto, item.concluida)
+        criarTarefa(item.texto, item.concluida, item.id)
+        tarefas.push(item)
     });
 }
