@@ -34,6 +34,7 @@ function criarTarefa(txt, concluida, id) {
     ul.appendChild(novatarefa)
 
     remove.addEventListener('click', function(){
+        remove.classList.add('btn-excluir')
         novatarefa.remove()
         tarefas = tarefas.filter(function(t) {
             return t.id !== id
@@ -43,6 +44,7 @@ function criarTarefa(txt, concluida, id) {
     });
 
     concluido.addEventListener('click', function(){
+        concluido.classList.add('btn-concluir')
         texto.classList.toggle('concluida')
         let search = tarefas.find(function(t) {
             return t.id === id
