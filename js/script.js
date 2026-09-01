@@ -44,13 +44,18 @@ function criarTarefa(txt, concluida, id) {
 
     remove.addEventListener('click', function(){
         remove.classList.add('btn-excluir')
-        novatarefa.remove()
+        if(confirm('Tem certeza que quer excluir?')) {
+            novatarefa.remove()
         tarefas = tarefas.filter(function(t) {
             return t.id !== id
             
         });
         localStorage.setItem("trf", JSON.stringify(tarefas))
          verificarListaVazia()
+        }else {
+            return
+        }
+        
     });
    
 
