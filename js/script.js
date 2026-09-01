@@ -73,6 +73,12 @@ function criarTarefa(txt, concluida, id) {
     editar.addEventListener('click', function(){
         texto.contentEditable = 'true'
         texto.focus()
+        texto.addEventListener('keydown', function(event) {
+            if(event.key === 'Enter') {
+                event.preventDefault()
+                texto.contentEditable = 'false'
+            }
+        }) ;
     });
 
     if(concluida) {
