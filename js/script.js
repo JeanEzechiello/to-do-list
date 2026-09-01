@@ -4,16 +4,22 @@ const ul = document.getElementById('lista-tarefas')
 let tarefas = []
 
 addbutton.addEventListener("click", function() {
-    let id = Date.now() + Math.random()
+    
     let txt = ipt.value
+
+    if(txt.trim() == '') {
+        return
+    }
+    let id = Date.now() + Math.random()
     criarTarefa(txt, false, id)
 
     tarefas.push({texto: txt, concluida: false, id: id})
     localStorage.setItem("trf", JSON.stringify(tarefas))
 
     ipt.value = ''
-
+    
 });
+
 
 function criarTarefa(txt, concluida, id) {
     let novatarefa = document.createElement('li')
