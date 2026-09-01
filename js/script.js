@@ -2,6 +2,7 @@ const addbutton = document.getElementById('addbutton')
 const ipt = document.getElementById('input-tarefa')
 const ul = document.getElementById('lista-tarefas')
 let tarefas = []
+let newtrf = null
 
 addbutton.addEventListener("click", function() {
     
@@ -17,8 +18,10 @@ addbutton.addEventListener("click", function() {
     localStorage.setItem("trf", JSON.stringify(tarefas))
 
     ipt.value = ''
-    
+
+    verificarListaVazia()
 });
+
 
 
 function criarTarefa(txt, concluida, id) {
@@ -47,7 +50,9 @@ function criarTarefa(txt, concluida, id) {
             
         });
         localStorage.setItem("trf", JSON.stringify(tarefas))
+         verificarListaVazia()
     });
+   
 
     concluido.addEventListener('click', function(){
         concluido.classList.add('btn-concluir')
@@ -77,4 +82,15 @@ if(tarefasSalvas) {
         criarTarefa(item.texto, item.concluida, item.id)
         tarefas.push(item)
     });
+}
+verificarListaVazia()
+
+function verificarListaVazia() {
+    if(ul.children.length === 0) {
+       newtrf = document.createElement('li')
+       newtrf.innerText = 'Nenhuma tarefa ainda'
+       ul.appendChild(newtrf)
+    } else {
+        newtrf.remove()
+    }
 }
