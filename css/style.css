@@ -70,7 +70,16 @@ button{
 
 #addbutton {
     margin-left: 8px;
+    margin-right: 6px;
     font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+#limpartudo {
+    font-weight: 500px;
     cursor: pointer;
     border-radius: 20px;
     outline: none;

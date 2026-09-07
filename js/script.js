@@ -1,6 +1,7 @@
 const addbutton = document.getElementById('addbutton')
 const ipt = document.getElementById('input-tarefa')
 const ul = document.getElementById('lista-tarefas')
+const botaoLimpar = document.getElementById('limpartudo')
 const contador = document.getElementById('contador')
 let tarefas = []
 let newtrf = null
@@ -110,7 +111,10 @@ function verificarListaVazia() {
        newtrf.innerText = 'Nenhuma tarefa ainda'
        ul.appendChild(newtrf)
     } else {
-        newtrf.remove()
+        if(newtrf) {
+            newtrf.remove()
+        }
+        
     }
 }
 
@@ -121,5 +125,18 @@ function atualizarContador() {
 
     contador.innerHTML = `${res.length} de ${tarefas.length} concluídas`
 }
+
+function limparTudo() {
+    ul.innerHTML = ''
+    tarefas = []
+    localStorage.clear()
+
+    verificarListaVazia()
+    atualizarContador()
+}
+
+botaoLimpar.addEventListener('click', function() {
+    limparTudo()
+})
 
 atualizarContador()
