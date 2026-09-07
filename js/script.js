@@ -5,9 +5,8 @@ const contador = document.getElementById('contador')
 let tarefas = []
 let newtrf = null
 
-addbutton.addEventListener("click", function() {
-    
-    let txt = ipt.value
+function adicionarTarefa() {
+     let txt = ipt.value
 
     if(txt.trim() == '') {
         return
@@ -22,9 +21,18 @@ addbutton.addEventListener("click", function() {
 
     verificarListaVazia()
     atualizarContador()
+}
+
+ipt.addEventListener("keydown", function(evento) {
+    if(evento.key === 'Enter') {
+          adicionarTarefa()
+     }
+   
 });
 
-
+addbutton.addEventListener('click', function() {
+    adicionarTarefa()
+})
 
 function criarTarefa(txt, concluida, id) {
     let novatarefa = document.createElement('li')
