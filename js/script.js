@@ -1,6 +1,7 @@
 const addbutton = document.getElementById('addbutton')
 const ipt = document.getElementById('input-tarefa')
 const ul = document.getElementById('lista-tarefas')
+const contador = document.getElementById('contador')
 let tarefas = []
 let newtrf = null
 
@@ -20,6 +21,7 @@ addbutton.addEventListener("click", function() {
     ipt.value = ''
 
     verificarListaVazia()
+    atualizarContador()
 });
 
 
@@ -44,7 +46,7 @@ function criarTarefa(txt, concluida, id) {
 
     remove.addEventListener('click', function(){
         remove.classList.add('btn-excluir')
-        if(confirm('Tem certeza que quer excluir?')) {
+
             novatarefa.remove()
         tarefas = tarefas.filter(function(t) {
             return t.id !== id
@@ -52,10 +54,7 @@ function criarTarefa(txt, concluida, id) {
         });
         localStorage.setItem("trf", JSON.stringify(tarefas))
          verificarListaVazia()
-        }else {
-            return
-        }
-        
+         atualizarContador()
     });
    
 
@@ -68,6 +67,7 @@ function criarTarefa(txt, concluida, id) {
         console.log(search)
         search.concluida = !search.concluida
         localStorage.setItem("trf", JSON.stringify(tarefas))
+        atualizarContador()
     });
 
     editar.addEventListener('click', function(){
@@ -105,3 +105,13 @@ function verificarListaVazia() {
         newtrf.remove()
     }
 }
+
+function atualizarContador() {
+    let res = tarefas.filter(function(t) {
+        return t.concluida
+    })
+
+    contador.innerHTML = `${res.length} de ${tarefas.length} concluídas`
+}
+
+atualizarContador()
