@@ -80,11 +80,15 @@ function criarTarefa(txt, concluida, id) {
     });
 
     editar.addEventListener('click', function(){
+        let textoOriginal = texto.innerText
         texto.contentEditable = 'true'
         texto.focus()
         texto.addEventListener('keydown', function(event) {
             if(event.key === 'Enter') {
                 event.preventDefault()
+                texto.contentEditable = 'false'
+            } else if(event.key === 'Escape') {
+                texto.innerText = textoOriginal
                 texto.contentEditable = 'false'
             }
         }) ;
